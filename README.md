@@ -48,7 +48,7 @@ You can disable/enable engine failures in the MSFS Assistance Options.
 - because of the simulator limitation, the anti-ice system cannot work only using electric power. Anti-ice system will work only when the engine is running.
 ![image](https://user-images.githubusercontent.com/27411874/153745793-37f19d22-9daf-4f3b-ab1e-8e6420392ac3.png)
 https://www.researchgate.net/publication/269212570_Overview_and_risk_assessment_of_icing_for_transport_category_aircraft_and_components
-- In high icing condition stall sensor can become inoperational if not heated. After 5 minutes of ice accumulation the stall sensor either silently stops operating or become permanently triggered. The way it fails is random each time. After failure the only way of recovery is to eanble stall sensor heater. Melting down the ice does not happen immediatly, it takes between 60 - 120 second for the stall sensor to become operational again depending on the amount of ice accumulated on the sensor.
+- In high icing condition stall sensor can become inoperational if not heated. After 5 minutes of ice accumulation, the stall sensor either silently stops operating or becomes permanently triggered. The way it fails is random each time. After failure, the only way of recovery is to enable the stall sensor heater. Melting down the ice does not happen immediately, it takes between 60 - 120 seconds for the stall sensor to become operational again depending on the amount of ice accumulated on the sensor.
 
 ***Miscellaneous***
 - Improved lighting and textures
@@ -58,7 +58,7 @@ https://www.researchgate.net/publication/269212570_Overview_and_risk_assessment_
 
 Based on the work of [C208-MSFS2020-Fix](https://github.com/Exp232/C208-MSFS2020-Fix), [msfs2020-C208-Improvment-Mod](https://github.com/SheepCreativeSoftware/msfs2020-C208-Improvment-Mod) and [dgtlanlg/C208B-mod](https://github.com/dgtlanlg/C208B-mod)
 
-Thanks to everyone who has contributed, and to PilotTrev for sharing his knowledge and first hand experience.
+Thanks to everyone who has contributed, and to PilotTrev for sharing his knowledge and first-hand experience.
 
 ----
 
