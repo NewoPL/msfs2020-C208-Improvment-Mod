@@ -9,6 +9,17 @@
 		} els{ l0 }
 	</macro>
 
+	<macro Name="ProcessThrottleAxisSnapZone">
+		(L:XMLVAR_Throttle_Lever_EnableReverse) 0 &gt; 
+		if{ @ProcessAxisSnapZone } els{ p0 #AXIS_SCALE_NEUTRAL# * #AXIS_SHIFT_NEUTRAL# + }
+	</macro>
+
+	<macro Name="ToggleThrottleLeverReverseMode">
+		(L:XMLVAR_Throttle_Lever_EnableReverse) ! d (&gt;L:XMLVAR_Throttle_Lever_EnableReverse)
+		if{ (L:#LEVER_POSITION_VAR#) #AXIS_SHIFT_NEUTRAL# - #AXIS_SCALE_NEUTRAL# / #AXIS_SCALE# * #AXIS_SHIFT# + }
+		els{ (L:#LEVER_POSITION_VAR#) #AXIS_SHIFT# - #AXIS_SCALE# / #AXIS_SCALE_NEUTRAL# * #AXIS_SHIFT_NEUTRAL# + }
+	</macro>
+
 	<InputEvent ID="CESSNA_MOD">
 	<Presets>
 		<Switch Param="INPUT_EVENT_ID_SOURCE">
@@ -58,9 +69,6 @@
 					<INIT_CODE>
 						#SIMVAR_INDEX# (#SWITCH_POSITION_TYPE#:#SWITCH_POSITION_VAR#, bool) (&gt;K:2:#KEY_ID_SET#)
 					</INIT_CODE>
-<!--				<SIMVAR_TO_WATCH_0>LIGHT #LIGHT_TYPE#:#SIMVAR_INDEX#</SIMVAR_TO_WATCH_0>  
-					<LOCAL_VAR_TO_WATCH_0>#SWITCH_POSITION_VAR#</LOCAL_VAR_TO_WATCH_0>         -->
-
 					<INC_CODE>1 (&gt;B:#INPUT_EVENT_ID_SOURCE#_#IE_NAME#_Set)</INC_CODE>
 					<DEC_CODE>0 (&gt;B:#INPUT_EVENT_ID_SOURCE#_#IE_NAME#_Set)</DEC_CODE>
 					<SET_CODE>
@@ -335,10 +343,12 @@
 		<Case Value="ENGINE_Propeller">
 			<Preset ID="#INPUT_EVENT_ID_SOURCE#_#IE_NAME#">
 				<Parameters Type="Default">
-					<AXIS_SCALE Process="Float">1 #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE_NEUTRAL Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LEVER_DETENT_POINT# - 2 /</AXIS_SCALE_NEUTRAL >
 				</Parameters>
 				<Parameters Type="Default">
 					<AXIS_SHIFT Process="Float">1 #AXIS_SCALE# -</AXIS_SHIFT>
+					<AXIS_SHIFT_NEUTRAL Process="Float">1 #AXIS_SCALE_NEUTRAL# -</AXIS_SHIFT_NEUTRAL>
 				</Parameters>
 				<Tooltip>
 					<Icon>MOVE_AXIS_Y</Icon>
@@ -450,10 +460,12 @@
 		<Case Value="ENGINE_Throttle">
 			<Preset ID="#INPUT_EVENT_ID_SOURCE#_#IE_NAME#">
 				<Parameters Type="Default">
-					<AXIS_SCALE Process="Float">1 #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE_NEUTRAL Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LEVER_DETENT_POINT# - 2 /</AXIS_SCALE_NEUTRAL >
 				</Parameters>
 				<Parameters Type="Default">
 					<AXIS_SHIFT Process="Float">1 #AXIS_SCALE# -</AXIS_SHIFT>
+					<AXIS_SHIFT_NEUTRAL Process="Float">1 #AXIS_SCALE_NEUTRAL# -</AXIS_SHIFT_NEUTRAL>
 				</Parameters>
 				<Tooltip>
 					<Icon>MOVE_AXIS_Y</Icon>
@@ -467,8 +479,8 @@
 					<Code>(L:#LEVER_POSITION_VAR#) #LOWER_LIMIT_PCT_OVER_100# - #UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - /</Code>
 					<Init>
 						(L:#EMERGENCY_POWER_VAR#) 0.01 &lt; if{
-							(A:GENERAL ENG THROTTLE LEVER POSITION:#ENGINE_ID#, position 16k) 16384 / #LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min
-							(&gt;L:#LEVER_POSITION_VAR#) 16384 *
+							(A:GENERAL ENG THROTTLE LEVER POSITION:#ENGINE_ID#, position 16k) 16384 /
+							#LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min (&gt;L:#LEVER_POSITION_VAR#)
 						}
 					</Init>
 					<WatchVars>
@@ -544,7 +556,7 @@
 							<Param>#LOWER_LIMIT_PCT_OVER_100#</Param>
 						</Binding>
 						<Binding Alias="ENGINE_All_Throttle_Idle">
-							<Param RPN="True">#LEVER_DETENT_POINT# 100 /</Param>
+							<Param RPN="True">#LEVER_DETENT_POINT#</Param>
 						</Binding>
 						<!-- event manipulating one throttle for specific engine -->
 						<Binding Alias="ENGINE_Throttle_#ENGINE_ID#_Full_Forward">
@@ -560,31 +572,34 @@
 							<Param>#UPPER_LIMIT_PCT_OVER_100#</Param>
 						</Binding>
 						<Binding EventID="THROTTLE_CUT">
-							<Param RPN="True">#LEVER_DETENT_POINT# 100 /</Param>
+							<Param RPN="True">#LEVER_DETENT_POINT#</Param>
 						</Binding>
 						<Binding EventID="THROTTLE#ENGINE_ID#_FULL">
 							<Param>#UPPER_LIMIT_PCT_OVER_100#</Param>
 						</Binding>
 						<Binding EventID="THROTTLE#ENGINE_ID#_CUT">
-							<Param RPN="True">#LEVER_DETENT_POINT# 100 /</Param>
+							<Param RPN="True">#LEVER_DETENT_POINT#</Param>
 						</Binding>
 						<Binding EventID="THROTTLE#ENGINE_ID#_SET">
 							<Param RPN="True">p0</Param>
 						</Binding>
 						<Binding EventID="THROTTLE#ENGINE_ID#_AXIS_SET_EX1">
-							<Param RPN="True">@ProcessAxisSnapZone</Param>
+							<Param RPN="True">@ProcessThrottleAxisSnapZone</Param>
 						</Binding>
 						<Binding EventID="AXIS_THROTTLE#ENGINE_ID#_SET">
-							<Param RPN="True">@ProcessAxisSnapZone</Param>
+							<Param RPN="True">@ProcessThrottleAxisSnapZone</Param>
 						</Binding>
 						<Binding EventID="THROTTLE_SET">
 							<Param RPN="True">p0</Param>
 						</Binding>
 						<Binding EventID="THROTTLE_AXIS_SET_EX1">
-							<Param RPN="True">@ProcessAxisSnapZone</Param>
+							<Param RPN="True">@ProcessThrottleAxisSnapZone</Param>
 						</Binding>
 						<Binding EventID="AXIS_THROTTLE_SET">
-							<Param RPN="True">@ProcessAxisSnapZone</Param>
+							<Param RPN="True">@ProcessThrottleAxisSnapZone</Param>
+						</Binding>
+						<Binding EventID="THROTTLE_REVERSE_THRUST_TOGGLE">
+							<Param RPN="True">@ToggleThrottleLeverReverseMode</Param>
 						</Binding>
 					</Bindings>
 				</Set>
@@ -593,10 +608,12 @@
 		<Case Value="ENGINE_EmergencyPower">
 			<Preset ID="#INPUT_EVENT_ID_SOURCE#_#IE_NAME#">
 				<Parameters Type="Default">
-					<AXIS_SCALE Process="Float">1 #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - 2 /</AXIS_SCALE>
+					<AXIS_SCALE_NEUTRAL Process="Float">#UPPER_LIMIT_PCT_OVER_100# #LEVER_DETENT_POINT# - 2 /</AXIS_SCALE_NEUTRAL >
 				</Parameters>
 				<Parameters Type="Default">
 					<AXIS_SHIFT Process="Float">1 #AXIS_SCALE# -</AXIS_SHIFT>
+					<AXIS_SHIFT_NEUTRAL Process="Float">1 #AXIS_SCALE_NEUTRAL# -</AXIS_SHIFT_NEUTRAL>
 				</Parameters>
 				<Tooltip>
 					<Icon>MOVE_AXIS_Y</Icon>
