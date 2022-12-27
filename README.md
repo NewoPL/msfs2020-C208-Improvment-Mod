@@ -65,6 +65,7 @@ Thanks to everyone who has contributed, and to PilotTrev for sharing his knowled
 
 ## Known Issues and Limitations
 - Anti Ice fluid is refilled only at the start of the new flight
+- If your garmin screen is dark use avionics knob to turn the brightness up
 
 ----
 
