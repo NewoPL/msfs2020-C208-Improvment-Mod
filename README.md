@@ -17,7 +17,10 @@ You can disable/enable engine failures in the MSFS Assistance Options.
 
 ***Aircraft Handling***
 - More control while taxiing, tighter turning circle
-- The throttle lever allows to set forward and beta power range with the same controller axis. Putting the controller input backward sets the reverse thrust. The idle position is in the middle and it has a small range of dead zone implemented that makes the throttle stick to the idle position for a small range of controller input. That  helps to set the idle position without too much struggle.
+- the throttle lever has been improved and can work in two modes:
+normal mode - where the controller axis moves the throttle lever from idle position to full power. It is the default mode set during the first load of the aircraft.
+expert mode - where the controller axis allows to set the throttle lever from full reverse through idle position to full power. The idle position is in the middle and it has a small range of dead zone implemented that makes the throttle stick to the idle position for a small range of controller input. That  helps to set the idle position without too much struggle.
+  You can change the throttle mode on cessna by assigning button to the THROTTLE REVERSE THRUST TOGGLE event. The throttle selected mode of the throttle is remembered between flights
 - The emergency power lever has been implemented in a simplified way. When used it overrides all throttle settings. Regular throttle is having no effect until the Emergency power lever is set back to normal position.
 
 ***Systems & Avionics***
