@@ -426,9 +426,14 @@
       "date": 133164616554657744
     },
     {
+      "path": "SimObjects/Airplanes/community-cessna-c208-mod/sound/C208B Fuel Alarm.wav",
+      "size": 129970,
+      "date": 133183625940136206
+    },
+    {
       "path": "SimObjects/Airplanes/community-cessna-c208-mod/sound/sound.xml",
-      "size": 33867,
-      "date": 133182604319070319
+      "size": 34437,
+      "date": 133183629161064121
     },
     {
       "path": "SimObjects/Airplanes/community-cessna-c208-mod/texture/CESSNA_208B_GRANDCARAVANEX_AIRFRAME_PROPELLER_ALBD.PNG.dds",
@@ -632,13 +637,13 @@
     },
     {
       "path": "SimObjects/Airplanes/community-cessna-c208-mod/texture/thumbnail.jpg",
-      "size": 393674,
-      "date": 133182816608818450
+      "size": 376147,
+      "date": 133183632675478554
     },
     {
       "path": "SimObjects/Airplanes/community-cessna-c208-mod/texture/thumbnail_small.jpg",
-      "size": 93972,
-      "date": 133182817099203268
+      "size": 88386,
+      "date": 133183632954487102
     },
     {
       "path": "texture/AS700/AS700_DECALS_ALBD.png",
