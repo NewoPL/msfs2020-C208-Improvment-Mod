@@ -365,8 +365,9 @@
 					<Code>(L:#LEVER_POSITION_VAR#) #LOWER_LIMIT_PCT_OVER_100# - #UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - /</Code>
 					<Init>
 						(L:XMLVAR_Overspeed_Test) ! if{ 
-							(A:GENERAL ENG PROPELLER LEVER POSITION:#ENGINE_ID#, position 16k) 16384 / #LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min
-							d (&gt;L:#LEVER_POSITION_VAR#) 16384 * (&gt;K:PROP_PITCH#ENGINE_ID#_SET)
+							(A:GENERAL ENG PROPELLER LEVER POSITION:#ENGINE_ID#, percent over 100) 
+							#LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min
+							(&gt;L:#LEVER_POSITION_VAR#)
 						}
 					</Init>
 					<WatchVars>
@@ -478,12 +479,13 @@
 					<TTValue RPN="True">(L:#LEVER_POSITION_VAR#) '%.1f%%' @sprintf</TTValue>
 				</Tooltip>
 				<Value>
-					<Units>float</Units>
+					<Units>percent over 100</Units>
 					<Code>(L:#LEVER_POSITION_VAR#) #LOWER_LIMIT_PCT_OVER_100# - #UPPER_LIMIT_PCT_OVER_100# #LOWER_LIMIT_PCT_OVER_100# - /</Code>
 					<Init>
 						(L:#EMERGENCY_POWER_VAR#) 0.01 &lt; if{
-							(A:GENERAL ENG THROTTLE LEVER POSITION:#ENGINE_ID#, position 16k) 16384 /
-							#LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min (&gt;L:#LEVER_POSITION_VAR#)
+							(A:GENERAL ENG THROTTLE LEVER POSITION:#ENGINE_ID#, percent over 100)
+							#LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min
+							(&gt;L:#LEVER_POSITION_VAR#)
 						}
 					</Init>
 					<WatchVars>
@@ -500,17 +502,17 @@
 					<Bindings>
 						<!-- event manipulating all throttles (declared for each throttle preset) -->
 						<Binding EventID="THROTTLE_INCR">
-							<Param Type="Float" RPN="True">p0 2 *</Param>
+							<Param Type="Float" RPN="True">p0 20 /</Param>
 						</Binding>
 						<Binding EventID="THROTTLE_INCR_SMALL">
-							<Param Type="Float" RPN="True">p0</Param>
+							<Param Type="Float" RPN="True">p0 40 /</Param>
 						</Binding>
 						<!-- event manipulating one throttle for specific engine -->
 						<Binding EventID="THROTTLE#ENGINE_ID#_INCR">
-							<Param Type="Float" RPN="True">p0 2 *</Param>
-						</Binding>
+							<Param Type="Float" RPN="True">p0 20 /</Param>
+						</Binding>                            
 						<Binding EventID="THROTTLE#ENGINE_ID#_INCR_SMALL">
-							<Param Type="Float" RPN="True">p0</Param>
+							<Param Type="Float" RPN="True">p0 40 /</Param>
 						</Binding>
 					</Bindings>
 				</Inc>
@@ -524,17 +526,17 @@
 					<Bindings>
 						<!-- event manipulating all throttles (declared for each throttle preset) -->
 						<Binding EventID="THROTTLE_DECR">
-							<Param Type="Float" RPN="True">p0 2 *</Param>
+							<Param Type="Float" RPN="True">p0 20 /</Param>
 						</Binding>
 						<Binding EventID="THROTTLE_DECR_SMALL">
-							<Param Type="Float" RPN="True">p0</Param>
+							<Param Type="Float" RPN="True">p0 40 /</Param>
 						</Binding>
 						<!-- event manipulating one throttle for specific engine -->
 						<Binding EventID="THROTTLE#ENGINE_ID#_DECR">
-							<Param Type="Float" RPN="True">p0 2 *</Param>
+							<Param Type="Float" RPN="True">p0 20 /</Param>
 						</Binding>
 						<Binding EventID="THROTTLE#ENGINE_ID#_DECR_SMALL">
-							<Param Type="Float" RPN="True">p0</Param>
+							<Param Type="Float" RPN="True">p0 40 /</Param>
 						</Binding>
 					</Bindings>
 				</Dec>
