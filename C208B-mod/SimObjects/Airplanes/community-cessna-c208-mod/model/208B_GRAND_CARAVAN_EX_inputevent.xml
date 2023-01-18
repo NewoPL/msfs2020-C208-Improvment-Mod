@@ -367,8 +367,7 @@
 						(L:XMLVAR_Overspeed_Test) ! if{ 
 							(A:GENERAL ENG PROPELLER LEVER POSITION:#ENGINE_ID#, percent over 100) 
 							#LOWER_LIMIT_PCT_OVER_100# max #UPPER_LIMIT_PCT_OVER_100# min
-							(&gt;L:#LEVER_POSITION_VAR#)
-						}
+							(&gt;L:#LEVER_POSITION_VAR#) }
 					</Init>
 					<WatchVars>
 						<Simvar ID="GENERAL ENG PROPELLER LEVER POSITION:#ENGINE_ID#"/>

@@ -2522,29 +2522,6 @@
 	</Alert>
 
 	<Alert>
-		<Type>SoundOnly</Type>
-		<SoundEvent>aural_landing_gear</SoundEvent>
-		<Condition>
-			<And>
-				<Simvar name="IS GEAR RETRACTABLE" unit="Boolean"/>
-				<Not>
-					<Simvar name="GEAR HANDLE POSITION" unit="Boolean"/>
-				</Not>
-				<Or>
-					<Greater>
-						<Simvar name="FLAPS HANDLE INDEX" unit="number"/>
-						<Constant>1</Constant>
-					</Greater>
-					<Equal>
-						<Simvar name="GENERAL ENG THROTTLE LEVER POSITION:1" unit="percent"/>
-						<Constant>0</Constant>
-					</Equal>
-				</Or>
-			</And>
-		</Condition>
-	</Alert>
-	
-	<Alert>
 		<Type>Test</Type>
 		<ShortText>TAWS TEST</ShortText>
 		<Condition>

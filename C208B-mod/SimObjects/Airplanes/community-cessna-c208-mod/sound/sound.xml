@@ -128,7 +128,17 @@
     <Sound WwiseData="false" WwiseEvent="GYRO_SOUND" FileName="C208B Fuel Alarm" ViewPoint="Inside" Continuous="true" NodeName="AS1000_Panel_NoAutopilot_1" SimVar="CIRCUIT ON" Units="Boolean" Index="1">
         <Range LowerBound="1"/>
         <Requires SimVar="FUEL TANK SELECTOR" Units="Enum" Index="1" BreakOnStop="True">
-		    <Range LowerBound="0" UpperBound="0"/>
+		    <Range UpperBound="0"/>
+        </Requires>
+    </Sound>
+
+    <Sound WwiseData="false" WwiseEvent="GYRO_SOUND" FileName="C208B Fuel Alarm" ViewPoint="Inside" Continuous="true" NodeName="AS1000_Panel_NoAutopilot_1" SimVar="CIRCUIT ON" Units="Boolean" Index="1">
+        <Range LowerBound="1"/>
+        <Requires LocalVar="XMLVAR_FireTest_Switch" Units="Enum" Index="1" BreakOnStop="True">
+		    <Range LowerBound="2" UpperBound="2"/>
+        </Requires>
+        <Requires SimVar="FUEL TANK SELECTOR" Units="Enum" Index="1" BreakOnStop="True">
+		    <Range LowerBound="1"/>
         </Requires>
     </Sound>
 
